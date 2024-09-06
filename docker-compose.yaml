@@ -1,0 +1,6 @@
+# services:
+#   web:
+#     build: .
+#     command: "fastapi dev app/main.py"
+#     ports:
+#       - "8000:8000"
