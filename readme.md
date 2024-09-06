@@ -20,9 +20,11 @@ Build complete API using FastAPI, PostgreSQL, Docker, Git.
 	* Due data
 	* Description
 	* Comment section
-#### Data Models::
-* User
-* Board
-* TaskList
-* Task
-* Comment
+
+| Data Models:	 | Pydantic API Schemas: |
+|:-------------:|:---------------------:|
+|   UserModel   |      UserSchema       |
+|  BoardModel   |      BoardSchema      |
+| TaskListModel |    TaskListSchema     |
+|   TaskModel   |      TaskSchema       |
+| CommentModel  |     CommentSchema     | 
