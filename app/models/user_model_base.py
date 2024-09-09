@@ -1,5 +1,5 @@
 from app.database import Base
-from .association_tables import board_user_association, user_task_association
+# from .models_main import board_user_association, user_task_association
 
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
@@ -11,7 +11,7 @@ import datetime as dt
 import uuid
 
 
-class UserModel(Base):
+class UserModelBase(Base):
     __tablename__ = 'users'
 
     uid: Mapped[uuid.UUID] = mapped_column(pg.UUID(as_uuid=True),
@@ -23,10 +23,7 @@ class UserModel(Base):
 
     hashed_password: Mapped[str]
 
-    # Relationships
-    user_comments = relationship('CommentModel', back_populates='author')
-    boards = relationship('BoardModel', secondary=board_user_association)
-    tasks = relationship('TaskModel',secondary=user_task_association)
+    # Relationships are defined in models_main.py
 
     def __repr__(self):
         return f'User:{self.username}; Email:{self.email}'

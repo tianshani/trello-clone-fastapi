@@ -1,14 +1,14 @@
 from ..database import Base
 
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import relationship, Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column
 import sqlalchemy.dialects.postgresql as pg
 
 import uuid
 import datetime as dt
 
 
-class CommentModel(Base):
+class CommentModelBase(Base):
     __tablename__ = 'comments'
 
     uid: Mapped[uuid.UUID] = mapped_column(pg.UUID(as_uuid=True),
@@ -24,5 +24,5 @@ class CommentModel(Base):
     author_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('users.uid'))
 
     # Relationships
-    parent_task = relationship('TaskModel', back_populates='comments')
-    author = relationship('UserModel', back_populates='user_comments')
+    # parent_task = relationship('TaskModel', back_populates='comments')
+    # author: Mapped[UserModel] = relationship('UserModel', back_populates='user_comments')

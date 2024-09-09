@@ -6,7 +6,7 @@ from .config import Config
 engine = create_engine(
     Config.DATABASE_URL,
     future=True,
-    echo=True
+    # echo=True
 )
 
 class Base(DeclarativeBase):

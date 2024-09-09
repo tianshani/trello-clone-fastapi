@@ -1,5 +1,6 @@
 from app.database import Base
-from .association_tables import user_task_association
+# from .models_main import CommentModel
+# from .models_main import user_task_association
 
 from sqlalchemy import String, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
@@ -9,7 +10,7 @@ import datetime as dt
 import uuid
 
 
-class TaskModel(Base):
+class TaskModelBase(Base):
     __tablename__ = 'tasks'
     
     uid: Mapped[uuid.UUID] = mapped_column(pg.UUID(as_uuid=True), primary_key=True, unique=True)
@@ -21,8 +22,8 @@ class TaskModel(Base):
     parent_tasklist_id: Mapped[uuid.UUID] = mapped_column(pg.UUID, ForeignKey('tasklists.uid'))
 
     # Relationships
-    comments = relationship('CommentModel', back_populates='parent_task')
-    users = relationship('UserModel', secondary=user_task_association)
+    # comments: Mapped[CommentModel] = relationship('CommentModel', back_populates='parent_task')
+    # users = relationship('UserModel', secondary=user_task_association)
 
     def __repr__(self):
         return f'Task:{self.title}; Description:{self.description[:10]}...'

@@ -1,15 +1,15 @@
 from app.database import Base
-from .association_tables import board_user_association
+# from .models_main import board_user_association
+# from .tasklist_model_base import TaskListModel
 
 import sqlalchemy.dialects.postgresql as pg
 from sqlalchemy import String
 from sqlalchemy.orm import relationship, mapped_column, Mapped
 
 import uuid
-import datetime as dt
 
 
-class BoardModel(Base):
+class BoardModelBase(Base):
     __tablename__ = 'boards'
 
     # uid = Column(pg.UUID, primary_key=True, unique=True, index=True, nullable=False)
@@ -19,9 +19,7 @@ class BoardModel(Base):
     # title = Column(String(50))
     title: Mapped[str] = mapped_column(String(50))
 
-    # Relationships
-    child_lists = relationship(list['TaskListModel'], back_populates='parent_board')
-    board_users = relationship('UserModel', secondary=board_user_association)
+    # Relationships are implemented in models_main.py
 
     def __repr__(self):
         return f'Board:{self.title}; id:{self.uid}'
